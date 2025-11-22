@@ -31,27 +31,27 @@ You’ll see `Final_2015_Data_Site3.csv` and `Final_2015_Data_Site8.csv` used ac
 
 ## Features & settings (quick reference)
 
-* **Lag settings** (`--lag`)
+**Lag settings** (`--lag`)
 
-  * `no_lag`: overnight t0 stats + `precip_t0` (retrospective)
-  * `precip_lags`: overnight t0 + `precip_d1`, `precip_sum3`, `precip_sum7` (causal)
-  * `both_lags`: `precip_lags` + env `median_d1`, `median_ma3` (causal)
+* `no_lag`: overnight t0 stats + `precip_t0` (retrospective)
+* `precip_lags`: overnight t0 + `precip_d1`, `precip_sum3`, `precip_sum7` (causal)
+* `both_lags`: `precip_lags` + env `median_d1`, `median_ma3` (causal)
 
-* **Zero policies** (`--zero-policy`)
+**Zero policies** (`--zero-policy`)
 
-  * `standard`: 0→NaN in train **and** test
-  * `train_keeps_zeros`: keep zeros in train; test zeros→NaN
+* `standard`: 0→NaN in train **and** test
+* `train_keeps_zeros`: keep zeros in train; test zeros→NaN
 
-* **Tuning**
+**Tuning**
 
-  * **Untuned** = fixed moderate defaults
-  * **Tuned** = nested K-fold random search
-    (`--tuned --cv-folds 5 --imputer-trials 48 --stage2-trials 96`)
+* **Untuned** = fixed moderate defaults
+* **Tuned** = nested K-fold random search
+  (`--tuned --cv-folds 5 --imputer-trials 48 --stage2-trials 96`)
 
-* **Protocols**
+**Protocols**
 
-  * `80/20` random split (seed=42)
-  * `LOO` leave-one-out (per day)
+* `80/20` random split (seed=42)
+* `LOO` leave-one-out (per day)
 
 ---
 
@@ -94,30 +94,45 @@ Per *window*, the **Lag × Zero** pairs are the 6 canonical settings:
 
 ---
 
-## Repo structure (per leaf folder)
-
-Each leaf folder (e.g., `pipeline_80_20_2015_S3_NoTuned/`) contains:
+## Top-level repository layout
 
 ```
-Final_2015_Data_Site3.csv         # or Site8, depending on the folder
+.
+├── pipeline_80_20_NoTuned/
+│   ├── pipeline_80_20_2015_S3_NoTuned/
+│   └── pipeline_80_20_2015_S8_NoTuned/
+├── pipeline_80_20_Tuned/
+│   ├── pipeline_80_20_2015_S3_Tuned/
+│   └── pipeline_80_20_2015_S8_Tuned/
+├── pipeline_loo_NoTuned/
+│   ├── pipeline_loo_2015_S3_NoTuned/
+│   └── pipeline_loo_2015_S8_NoTuned/
+├── pipeline_loo_Tuned/
+│   ├── pipeline_loo_2015_S3_Tuned/
+│   └── pipeline_loo_2015_S8_Tuned/
+├── scripts/                  # (optional helpers; some folders also carry their own scripts/)
+└── figs/                     # auto-created by the figure generator (see “Figures”)
+```
+
+### Per-protocol, per-site leaf folder layout
+
+Each leaf folder (e.g., `pipeline_80_20_NoTuned/pipeline_80_20_2015_S3_NoTuned/`) contains:
+
+```
+Final_2015_Data_Site3.csv          # or Site8, depending on the folder
 Final_2015_Data_Site8.csv
-pipeline_80_20.py or pipeline_loo.py
-*_Runs.ipynb                      # batch all 6 (main) or 12 (main+short) combos
-results/                          # auto-created; holds __summary__ and __preds__ CSVs
-scripts/                          # LaTeX table builders
+pipeline_80_20.py  or  pipeline_loo.py
+*_Runs.ipynb                       # batch all 6 (main) or 12 (main+short) combos
+results/                           # auto-created; holds __summary__ and __preds__ CSVs
+scripts/                           # LaTeX table builders for that folder
 ```
-
-You have this mirrored for:
-
-* `pipeline_80_20_NoTuned/` and `pipeline_80_20_Tuned/` (each for S3 / S8)
-* `pipeline_loo_NoTuned/` and `pipeline_loo_Tuned/` (each for S3 / S8)
 
 ---
 
 ## How to run (CLI)
 
 > Run **inside** the target leaf folder (each has its own `pipeline_*.py` and `results/`).
-> `run-all` executes the **6 mandatory combos** for the **main** window by default (adjust window if needed).
+> `run-all` executes the **6 mandatory combos** for the **main** window by default (add `--window 2015-07-01:2015-10-21` for the short window).
 
 ### 80/20 — Site 3
 
@@ -136,8 +151,6 @@ python pipeline_80_20.py --cmd run-all \
   --file Final_2015_Data_Site3.csv \
   --tuned --cv-folds 5 --imputer-trials 48 --stage2-trials 96
 ```
-
-> Use `--window 2015-07-01:2015-10-21` to run the optional short window.
 
 ### 80/20 — Site 8
 
@@ -193,7 +206,7 @@ python pipeline_loo.py --cmd run-all \
   --tuned --cv-folds 5 --imputer-trials 48 --stage2-trials 96
 ```
 
-**Single-run example (change args as needed)**
+**Single-run example**
 
 ```bash
 python pipeline_80_20.py --cmd run \
@@ -208,14 +221,14 @@ python pipeline_80_20.py --cmd run \
 
 ## How to run (Notebook)
 
-Each leaf folder has a batching notebook like `*_Runs.ipynb`. Minimal pattern (main window only):
+Each leaf folder has a batching notebook like `*_Runs.ipynb`:
 
 ```python
-from pipeline_80_20 import run_once  # or: from pipeline_loo import run_once
+from pipeline_80_20 import run_once     # or: from pipeline_loo import run_once
 
 lags = ["no_lag", "precip_lags", "both_lags"]
 zps  = ["standard", "train_keeps_zeros"]
-ws, we = "2015-07-01", "2015-10-31"   # main window (mandatory)
+ws, we = "2015-07-01", "2015-10-31"     # main window (mandatory)
 
 for lag in lags:
     for zp in zps:
@@ -223,7 +236,7 @@ for lag in lags:
             file="Final_2015_Data_Site3.csv",   # or Site8
             window_start=ws, window_end=we,
             lag_setting=lag, zero_policy=zp,
-            tuned=False                          # set True and add cv_folds/imputer_trials/stage2_trials for tuned
+            tuned=False                         # set True and pass cv_folds/imputer_trials/stage2_trials for tuned runs
         )
 ```
 
@@ -245,15 +258,63 @@ Each run writes to `results/`:
   `...__<Target>__preds__<timestamp>.csv` with
   `Date, True, Predicted, was_missing, Residual`
 
-> **Scoring rule**: MAE/RMSE computed **only** on test rows that were *originally known* (not NaN and not 0 before zero-handling). Residuals for originally 0/NaN rows are reported as NaN.
+> **Scoring rule**: MAE/RMSE are computed **only** on test rows that were *originally known* (not NaN and not 0 before zero-handling). Residuals for originally 0/NaN rows are reported as NaN.
+
+---
+
+## Figures (auto-generated)
+
+You can auto-plot **every run** discovered under any `results/` folder (across all protocols/sites/tuning) and write publication-ready PDFs.
+
+**What gets generated per run**
+
+* `__time_series.pdf` — True vs Predicted over time (with monthly ticks)
+* `__residuals_time.pdf` — Residuals (True − Predicted) over time
+* `__residual_hist.pdf` — Residual distribution
+* `__true_vs_pred_scatter.pdf` — Scatter with y=x reference
+* `__ALL.pdf` — a single multi-page PDF containing all four plots
+
+**Where they go**
+Figures are grouped into a repo-level tree (auto-created):
+
+```
+figs/
+└── <Protocol>/                 # 80_20 or LOO
+    └── <tuned|untuned>/
+        └── Site X/            # “Site 3” or “Site 8”
+            └── <window>/      # e.g., 2015-07-01_2015-10-31
+                ├── <run_prefix>__time_series.pdf
+                ├── <run_prefix>__residuals_time.pdf
+                ├── <run_prefix>__residual_hist.pdf
+                ├── <run_prefix>__true_vs_pred_scatter.pdf
+                └── <run_prefix>__ALL.pdf
+```
+
+**Titles**
+Two-line titles to avoid cropping:
+
+* Line 1: `Site X, <species>` — `Protocol — Lag — Zero policy — tuned/untuned — window`
+* Line 2: the plot name (e.g., *True vs Predicted over time*)
+
+**How to generate**
+Place the auto-plot script (or notebook cell) at the repo root and run:
+
+```bash
+python scripts/plot_all_runs.py
+# or inside a notebook:
+from plot_all_runs import plot_everything
+plot_everything()  # discovers all results/ folders recursively
+```
+
+> The plotter is robust to small filename differences. It infers missing tokens when possible and falls back to reading the Date range from the CSV if the window token isn’t present.
 
 ---
 
 ## LaTeX tables
 
-Table builders live under `scripts/`. Typical usage (writes a single `tabularx` you can `\input{}`):
+Table builders live under `scripts/`. Typical usage:
 
-* **80/20 untuned by window** → `results/_8020_untuned_bywindow.tex`
+* **80/20 untuned by window** → writes `results/_8020_untuned_bywindow.tex`
 * **Flat “all runs” summary** → single table listing Target / Protocol / Lag / Window / Zero policy / Tuned / n_known / MAE / RMSE
 
 If your filenames follow the default pattern (they do), the scripts will auto-parse.
@@ -262,10 +323,10 @@ If your filenames follow the default pattern (they do), the scripts will auto-pa
 
 ## Reproducibility
 
-* Seed fixed at **42** (splits + random search).
-* MICE deterministic (`sample_posterior=False`, fixed order).
-* **Tuned** runs use **nested K-fold** CV (no early stopping); selection by validation **RMSE**.
-* **Evaluation**: final **MAE** and **RMSE** only (no R²).
+* Seed fixed at **42** (splits + random search)
+* MICE deterministic (`sample_posterior=False`, fixed order)
+* **Tuned** runs use **nested K-fold** CV; selection by validation **RMSE**
+* **Evaluation**: final **MAE** and **RMSE** only (no R²)
 
 ---
 
@@ -274,13 +335,13 @@ If your filenames follow the default pattern (they do), the scripts will auto-pa
 Python ≥ 3.10 with:
 
 ```
-numpy, pandas, scikit-learn, xgboost
+numpy, pandas, scikit-learn, xgboost, matplotlib
 ```
 
 Quick setup:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
