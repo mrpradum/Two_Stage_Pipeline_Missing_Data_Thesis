@@ -11,7 +11,7 @@ Two-stage pipelines for retrospective time-series imputation of daily mosquito c
 
 ## Sites (S3 vs S8)
 
-| Code   | Site (village)     | Short context (field notes)                               |
+| Code   | Site               | Short context                                             |
 | ------ | ------------------ | --------------------------------------------------------- |
 | **S3** | **Kouribabougou**  | More shade; rainy season = running/edge water             |
 | **S8** | **Nanguilabougou** | More direct sun; rainy season = persistent stagnant water |
