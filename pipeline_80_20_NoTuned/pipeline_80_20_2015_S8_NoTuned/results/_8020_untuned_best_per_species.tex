@@ -1,0 +1,13 @@
+\begin{table}[htbp]
+\centering
+\caption{Best 80/20 untuned configuration per species (by RMSE).}
+\label{tab:8020-untuned-best-per-species}
+\begin{tabular}{llll r rr}
+\toprule
+Target & Lag & Window & Zero policy & $n_{\mathrm{known}}$ & MAE & RMSE\\
+\midrule
+Adults\_8\_Col & Precip-lags & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 20 & 4.400 & 7.880\\
+Adults\_8\_Gam0 & Precip-lags & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 18 & 2.944 & 5.672\\
+\bottomrule
+\end{tabular}
+\end{table}

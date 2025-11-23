@@ -1,0 +1,3 @@
+protocol,run_tag,timestamp,file,window_start,window_end,lag_setting,features_desc,zero_policy,tuned,cv_folds,imputer_trials,stage2_trials,target,known_rows,MAE,RMSE
+80/20,8020__no_lag__standard__2015-07-01_2015-10-31__tuned,20251008_204857,Final_2015_Data_Site8.csv,2015-07-01,2015-10-31,no_lag,Overnight t0 stats; Precip same-day (precip_t0),TRAIN & TEST: 0→NaN,True,5,48,96,Adults_8_Col,20,3.8,7.874007874011811
+80/20,8020__no_lag__standard__2015-07-01_2015-10-31__tuned,20251008_204857,Final_2015_Data_Site8.csv,2015-07-01,2015-10-31,no_lag,Overnight t0 stats; Precip same-day (precip_t0),TRAIN & TEST: 0→NaN,True,5,48,96,Adults_8_Gam0,18,3.5555555555555554,5.773502691896258

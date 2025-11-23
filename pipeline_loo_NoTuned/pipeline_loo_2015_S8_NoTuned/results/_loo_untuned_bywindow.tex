@@ -1,0 +1,47 @@
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\caption{LOO (untuned) results, presented separately by analysis window. Metrics computed on originally known test rows only.}
+\label{tab:loo-untuned-bywindow}
+\subsubsection*{Window: 2015-07-01 – 2015-10-21}
+\begin{tabularx}{\textwidth}{l l X r r r}
+\toprule
+Target & Lag & Zero policy & $n_{\mathrm{known}}$ & MAE & RMSE\\
+\midrule
+Adults\_8\_Col & Precip-lags & 0→NaN train+test & 89 & 4.135 & 6.827\\
+Adults\_8\_Col & No-lag & 0→NaN train+test & 89 & 4.281 & 6.953\\
+Adults\_8\_Col & Both-lags & 0→NaN train+test & 89 & 4.697 & 7.315\\
+Adults\_8\_Col & No-lag & train keeps 0; test 0→NaN & 89 & 4.674 & 7.601\\
+Adults\_8\_Col & Both-lags & train keeps 0; test 0→NaN & 89 & 5.157 & 7.780\\
+Adults\_8\_Col & Precip-lags & train keeps 0; test 0→NaN & 89 & 4.888 & 7.816\\
+Adults\_8\_Gam0 & No-lag & 0→NaN train+test & 91 & 3.451 & 5.435\\
+Adults\_8\_Gam0 & Both-lags & 0→NaN train+test & 91 & 3.505 & 5.644\\
+Adults\_8\_Gam0 & Both-lags & train keeps 0; test 0→NaN & 91 & 3.495 & 5.803\\
+Adults\_8\_Gam0 & Precip-lags & 0→NaN train+test & 91 & 3.626 & 5.867\\
+Adults\_8\_Gam0 & No-lag & train keeps 0; test 0→NaN & 91 & 3.758 & 5.887\\
+Adults\_8\_Gam0 & Precip-lags & train keeps 0; test 0→NaN & 91 & 3.637 & 5.940\\
+\bottomrule
+\end{tabularx}
+\vspace{0.75em}
+\subsubsection*{Window: 2015-07-01 – 2015-10-31}
+\begin{tabularx}{\textwidth}{l l X r r r}
+\toprule
+Target & Lag & Zero policy & $n_{\mathrm{known}}$ & MAE & RMSE\\
+\midrule
+Adults\_8\_Col & Precip-lags & 0→NaN train+test & 90 & 4.111 & 6.859\\
+Adults\_8\_Col & No-lag & 0→NaN train+test & 90 & 4.178 & 6.880\\
+Adults\_8\_Col & Both-lags & 0→NaN train+test & 90 & 4.278 & 6.911\\
+Adults\_8\_Col & Both-lags & train keeps 0; test 0→NaN & 90 & 5.056 & 7.646\\
+Adults\_8\_Col & Precip-lags & train keeps 0; test 0→NaN & 90 & 4.856 & 7.722\\
+Adults\_8\_Col & No-lag & train keeps 0; test 0→NaN & 90 & 4.756 & 7.733\\
+Adults\_8\_Gam0 & No-lag & 0→NaN train+test & 92 & 3.457 & 5.389\\
+Adults\_8\_Gam0 & Both-lags & train keeps 0; test 0→NaN & 92 & 3.359 & 5.656\\
+Adults\_8\_Gam0 & Both-lags & 0→NaN train+test & 92 & 3.554 & 5.704\\
+Adults\_8\_Gam0 & No-lag & train keeps 0; test 0→NaN & 92 & 3.620 & 5.730\\
+Adults\_8\_Gam0 & Precip-lags & 0→NaN train+test & 92 & 3.696 & 5.846\\
+Adults\_8\_Gam0 & Precip-lags & train keeps 0; test 0→NaN & 92 & 3.609 & 5.947\\
+\bottomrule
+\end{tabularx}
+\end{table}

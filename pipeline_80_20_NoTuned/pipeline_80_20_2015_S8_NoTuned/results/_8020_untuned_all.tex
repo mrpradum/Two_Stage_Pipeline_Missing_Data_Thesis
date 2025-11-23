@@ -1,0 +1,35 @@
+\begin{table}[htbp]
+\centering
+\caption{80/20 (untuned) performance across lag/zero-policy/windows. Lower is better. Bold RMSE marks the per-species best. Metrics computed on originally known test rows only.}
+\label{tab:8020-untuned}
+\begin{tabular}{llll r rr}
+\toprule
+Target & Lag & Window & Zero policy & $n_{\mathrm{known}}$ & MAE & RMSE\\
+\midrule
+Adults\_8\_Col & Precip-lags & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 20 & 4.400 & \textbf{7.880}\\
+Adults\_8\_Col & No-lag & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 20 & 4.150 & 7.947\\
+Adults\_8\_Col & Both-lags & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 20 & 4.800 & 8.179\\
+Adults\_8\_Col & No-lag & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 20 & 4.750 & 8.255\\
+Adults\_8\_Col & Both-lags & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 20 & 5.050 & 8.352\\
+Adults\_8\_Col & Precip-lags & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 20 & 5.100 & 8.672\\
+Adults\_8\_Col & No-lag & 2015-07-01 – 2015-10-21 & TRAIN \& TEST: 0→NaN & 21 & 6.190 & 9.447\\
+Adults\_8\_Col & Precip-lags & 2015-07-01 – 2015-10-21 & TRAIN \& TEST: 0→NaN & 21 & 6.143 & 9.484\\
+Adults\_8\_Col & Both-lags & 2015-07-01 – 2015-10-21 & TRAIN \& TEST: 0→NaN & 21 & 6.810 & 9.825\\
+Adults\_8\_Col & Both-lags & 2015-07-01 – 2015-10-21 & TRAIN keeps zeros; TEST 0→NaN & 21 & 7.048 & 9.904\\
+Adults\_8\_Col & No-lag & 2015-07-01 – 2015-10-21 & TRAIN keeps zeros; TEST 0→NaN & 21 & 6.524 & 9.926\\
+Adults\_8\_Col & Precip-lags & 2015-07-01 – 2015-10-21 & TRAIN keeps zeros; TEST 0→NaN & 21 & 6.524 & 10.362\\
+Adults\_8\_Gam0 & Precip-lags & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 18 & 2.944 & \textbf{5.672}\\
+Adults\_8\_Gam0 & Both-lags & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 18 & 3.500 & 5.778\\
+Adults\_8\_Gam0 & Both-lags & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 18 & 3.611 & 5.902\\
+Adults\_8\_Gam0 & No-lag & 2015-07-01 – 2015-10-31 & TRAIN keeps zeros; TEST 0→NaN & 18 & 3.444 & 5.907\\
+Adults\_8\_Gam0 & Precip-lags & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 18 & 3.889 & 5.963\\
+Adults\_8\_Gam0 & No-lag & 2015-07-01 – 2015-10-21 & TRAIN \& TEST: 0→NaN & 18 & 4.667 & 6.046\\
+Adults\_8\_Gam0 & No-lag & 2015-07-01 – 2015-10-31 & TRAIN \& TEST: 0→NaN & 18 & 3.833 & 6.169\\
+Adults\_8\_Gam0 & Both-lags & 2015-07-01 – 2015-10-21 & TRAIN \& TEST: 0→NaN & 18 & 5.056 & 6.662\\
+Adults\_8\_Gam0 & No-lag & 2015-07-01 – 2015-10-21 & TRAIN keeps zeros; TEST 0→NaN & 18 & 5.222 & 6.749\\
+Adults\_8\_Gam0 & Both-lags & 2015-07-01 – 2015-10-21 & TRAIN keeps zeros; TEST 0→NaN & 18 & 5.389 & 7.130\\
+Adults\_8\_Gam0 & Precip-lags & 2015-07-01 – 2015-10-21 & TRAIN \& TEST: 0→NaN & 18 & 5.778 & 7.348\\
+Adults\_8\_Gam0 & Precip-lags & 2015-07-01 – 2015-10-21 & TRAIN keeps zeros; TEST 0→NaN & 18 & 6.000 & 7.902\\
+\bottomrule
+\end{tabular}
+\end{table}
