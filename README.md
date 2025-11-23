@@ -2,8 +2,8 @@
 
 Two-stage pipelines for retrospective time-series imputation of daily mosquito counts:
 
-* **Stage 1**: MICE (IterativeImputer) with **XGBoost Poisson** as the conditional model
-* **Stage 2**: Per-species **XGBoost Poisson** using engineered features + the Stage-1 imputed *other* species (same day)
+* **Stage 1**: MICE (IterativeImputer) with **XGBoost Poisson loss** as the conditional model
+* **Stage 2**: Per-species **XGBoost with Poisson loss** using engineered features + the Stage-1 imputed *other* species (same day)
 
 **Metrics**: we report **MAE** and **RMSE** only (computed on *originally known* test rows).
 
