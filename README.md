@@ -19,6 +19,31 @@ Two-stage pipelines for retrospective time-series imputation of daily mosquito c
 You’ll see `Final_2015_Data_Site3.csv` and `Final_2015_Data_Site8.csv` used accordingly.
 
 ---
+## Data & citation
+
+* The **2015 Site 3 & Site 8 datasets** used here are from the paper **“abc”** (the paper PDF/data are in the repository root).
+* Please **cite the source paper** when using this code or the derived figures/tables.
+
+Citation:
+
+```
+M. Gildenhard, E. K. Rono, A. Diarra, A. Boissière, P. Bascunan, P. Carrillo-Bustamante, D. Camara, H. Krüger, M. Mariko, R. Mariko, P. Mireji, S. E. Nsango, J. Pompon, Y. Reis, M. K. Rono, P. B. Seda, J. Thailayil, A. Traoré, C. V. Yapto, P. Awono-Ambene, R. K. Dabiré, A. Diabaté, D. Masiga, F. Catteruccia, I. Morlais, M. Diallo, D. Sangaré, and E. A. Levashina. “Mosquito microevolution drives Plasmodium falciparum dynamics”. In: Nature Microbiology 4.6 (June 2019). PMCID: PMC7613322, pp. 941–947. +)": 10.1038/s41564- 019-0414-9. pmid: 30911126. /%0: https://doi.org/10.1038/s41564-019-0414-9.
+```
+
+```bibtex
+@article{gildenhard2019mosquito,
+  title={Mosquito microevolution drives Plasmodium falciparum dynamics},
+  author={Gildenhard, Markus and Rono, Evans K and Diarra, Assetou and Boissiere, Anne and Bascunan, Priscila and Carrillo-Bustamante, Paola and Camara, Djeneba and Kr{\"u}ger, Hanne and Mariko, Modibo and Mariko, Ramata and others},
+  journal={Nature microbiology},
+  volume={4},
+  number={6},
+  pages={941--947},
+  year={2019},
+  publisher={Nature Publishing Group UK London}
+}
+```
+
+> Note: In the repo, the CSVs are named `Final_2015_Data_Site3.csv` and `Final_2015_Data_Site8.csv`. If you relocate/rename them, update the pipeline `--file` argument accordingly.
 
 ## Analysis windows
 
@@ -98,6 +123,9 @@ Per *window*, the **Lag × Zero** pairs are the 6 canonical settings:
 
 ```
 .
+├── site3_Data_Info.ipynb         # visualization for Site 3 (2015)
+├── site8_Data_Info.ipynb         # visualization for Site 8 (2015)
+├── all_pots.ipynb                # Notebook wrapper to generate all figs/ from results/
 ├── pipeline_80_20_NoTuned/
 │   ├── pipeline_80_20_2015_S3_NoTuned/
 │   └── pipeline_80_20_2015_S8_NoTuned/
